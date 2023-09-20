@@ -22,7 +22,17 @@ function partitionBooksByBorrowedStatus(books = []) {
   return tally;
 }
 
-function getBorrowersForBook(book = {}, accounts = []) {}
+const getTopTen = (array) => array.slice(0, 10);
+
+function getBorrowersForBook(book = {}, accounts = []) {
+  const { borrows } = book;
+
+  const borrowedBy = borrows.map(({ id, returned }) => {
+    const account = accounts.find((account) => (account = account.id === id));
+    return { ...account, returned };
+  });
+  return getTopTen(borrowedBy);
+}
 
 module.exports = {
   findAuthorById,

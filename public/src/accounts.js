@@ -11,11 +11,12 @@ function sortAccountsByLastName(accounts = []) {
 }
 
 function getTotalNumberOfBorrows(account = {}, books = []) {
-  let totalBorrows = 0;
-  books.forEach((book) => {
-    // console.log(book.borrows);
+  const { id } = account;
+
+  const totalBorrows = books.reduce((accumulator, book) => {
     book.borrows.forEach((borrow) => {
-      if (borrow.id === account.id) totalBorrows++;
+      if (borrow.id === id) accumulator++;
+      return accumulator;
     });
   });
   return totalBorrows;
