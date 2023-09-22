@@ -33,11 +33,12 @@ function getMostPopularBooks(books = []) {
   //arrange books by number of borrows
   books
     .sort((bookA, bookB) => bookB.borrows.length - bookA.borrows.length)
-    .forEach((book) =>
-      mostPopular.push({ name: book.title, count: book.borrows.length })
+    .slice(0, 5)
+    .forEach(({ title, borrows }) =>
+      mostPopular.push({ name: title, count: borrows.length })
     );
 
-  return theTopFive(mostPopular);
+  return mostPopular;
 }
 
 function getMostPopularAuthors(books = [], authors = []) {

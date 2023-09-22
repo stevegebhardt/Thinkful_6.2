@@ -11,14 +11,16 @@ function sortAccountsByLastName(accounts = []) {
 }
 
 function getTotalNumberOfBorrows(account = {}, books = []) {
+  //deconstruct account object
   const { id } = account;
 
+  //loop through books array and count up how many times each book was borrowed by the account id
   const totalBorrows = books.reduce((accumulator, book) => {
     book.borrows.forEach((borrow) => {
       if (borrow.id === id) accumulator++;
-      return accumulator;
     });
-  });
+    return accumulator;
+  }, 0);
   return totalBorrows;
 }
 
